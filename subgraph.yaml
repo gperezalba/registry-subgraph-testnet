@@ -1,0 +1,23 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: Registry
+    network: mainnet
+    source:
+      address: "0x2DDe97540CcF874042A516B28D1C35A585B4CD27"
+      abi: Registry
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.3
+      language: wasm/assemblyscript
+      entities:
+        - NewIdentityDD
+      abis:
+        - name: Registry
+          file: ./abis/Registry.json
+      eventHandlers:
+        - event: NewIdentityDD(indexed address,indexed bytes32)
+          handler: handleNewIdentityDD
+      file: ./src/registry.ts
